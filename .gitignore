@@ -1,0 +1,13 @@
+# .NET build output
+[Bb]in/
+[Oo]bj/
+# VS
+.vs/
+*.user
+*.suo
+# NuGet
+packages/
+*.nupkg
+# OS
+.DS_Store
+Thumbs.db

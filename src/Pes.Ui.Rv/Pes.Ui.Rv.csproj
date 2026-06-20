@@ -1,0 +1,28 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net48</TargetFramework>
+    <LangVersion>latest</LangVersion>
+    <RootNamespace>Pes.Ui.Rv</RootNamespace>
+    <AssemblyName>Pes.Ui.Rv</AssemblyName>
+    <ImplicitUsings>disable</ImplicitUsings>
+    <Nullable>disable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Pes.Ui.Messaging\Pes.Ui.Messaging.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <!--
+      TIBCO Rendezvous .NET API (상용). 설치본의 DLL 을 참조한다.
+      TIBRV_HOME 환경변수 기준 (예: C:\tibco\tibrv\8.4\bin\TIBCO.Rendezvous.dll).
+      Maven Central 같은 공개 패키지가 없으므로 로컬/사내 경로 참조.
+    -->
+    <Reference Include="TIBCO.Rendezvous">
+      <HintPath>$(TIBRV_HOME)\bin\TIBCO.Rendezvous.dll</HintPath>
+      <Private>false</Private>
+    </Reference>
+  </ItemGroup>
+
+</Project>

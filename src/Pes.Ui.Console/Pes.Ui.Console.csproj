@@ -1,0 +1,18 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net48</TargetFramework>
+    <LangVersion>latest</LangVersion>
+    <RootNamespace>Pes.Ui.Console</RootNamespace>
+    <AssemblyName>Pes.Ui.Console</AssemblyName>
+    <ImplicitUsings>disable</ImplicitUsings>
+    <Nullable>disable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Pes.Ui.Messaging\Pes.Ui.Messaging.csproj" />
+    <ProjectReference Include="..\Pes.Ui.Rv\Pes.Ui.Rv.csproj" />
+  </ItemGroup>
+
+</Project>
