@@ -1,5 +1,9 @@
 # PES UI (C#, .NET Framework 4.8)
 
+[![CI](https://github.com/X0005274/pes-ui/actions/workflows/ci.yml/badge.svg)](https://github.com/X0005274/pes-ui/actions/workflows/ci.yml)
+[![Release](https://img.shields.io/github/v/release/X0005274/pes-ui?sort=semver)](https://github.com/X0005274/pes-ui/releases/latest)
+![.NET Framework](https://img.shields.io/badge/.NET%20Framework-4.8-blueviolet)
+
 PES 시스템의 **UI 클라이언트** 레이어. TIBCO Rendezvous 로 LOT/WF/DURABLE 요청을 보내고
 Reply(`PesProcessResult`)를 받습니다. 메시지는 **Java Biz 레이어와 동일한 JSON 계약**을 사용합니다.
 
