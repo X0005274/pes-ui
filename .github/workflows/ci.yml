@@ -8,7 +8,7 @@ on:
 
 jobs:
   build:
-    name: Build (full solution, TIBCO stub)
+    name: Build & Test (full solution, TIBCO stub)
     # net48 빌드를 위해 .NET Framework 가 설치된 Windows 러너 사용
     runs-on: windows-latest
     steps:
@@ -19,7 +19,10 @@ jobs:
         with:
           dotnet-version: '10.0.x'
 
-      # 기본(UseRealTibrv=false)으로 TIBCO 스텁을 사용해 전체 솔루션을 빌드/검증.
+      # 기본(UseRealTibrv=false)으로 TIBCO 스텁을 사용해 전체 솔루션 빌드.
       # 운영 빌드는 -p:UseRealTibrv=true + TIBRV_HOME 로 실제 DLL 참조.
       - name: Build solution
         run: dotnet build Pes.Ui.sln -c Release --nologo
+
+      - name: Test (JSON 계약 검증)
+        run: dotnet test Pes.Ui.sln -c Release --no-build --nologo
