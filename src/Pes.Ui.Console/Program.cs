@@ -26,7 +26,7 @@ namespace Pes.Ui.Console
 
             using (IPesRvClient client = new TibrvPesClient(service, network, daemon))
             {
-                PesProcessResult result = client.SendLotRequest(subject, message, 10.0);
+                PesProcessResult result = client.SendRequest(subject, message, 10.0);
                 if (result == null)
                 {
                     System.Console.WriteLine("No reply (timeout).");

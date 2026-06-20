@@ -21,7 +21,7 @@ namespace Pes.Ui.Rv
             this.transport = new NetTransport(service, network, daemon);
         }
 
-        public PesProcessResult SendLotRequest(string subject, LotMessage message, double timeoutSeconds)
+        public PesProcessResult SendRequest(string subject, object message, double timeoutSeconds)
         {
             if (string.IsNullOrEmpty(subject))
             {
