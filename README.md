@@ -3,7 +3,21 @@
 PES 시스템의 **UI 클라이언트** 레이어. TIBCO Rendezvous 로 LOT/WF/DURABLE 요청을 보내고
 Reply(`PesProcessResult`)를 받습니다. 메시지는 **Java Biz 레이어와 동일한 JSON 계약**을 사용합니다.
 
-> 서버(Biz) 구현은 별도 저장소 [`pes-boot`](https://github.com/X0005274/pes-boot) (Java/Spring Boot).
+## 관련 저장소
+
+이 저장소는 **UI 클라이언트** 입니다. 서버(Biz)와 PES.UI 포워더는 별도 저장소에 있습니다.
+
+| 저장소 | 레이어 | 설명 |
+|---|---|---|
+| **pes-ui** (이 저장소) | C# UI (.NET Framework 4.8) | TIBCO RV 로 LOT/WF/DURABLE 요청 송신 |
+| [pes-boot](https://github.com/X0005274/pes-boot) | PES.BIZ (Java/Spring Boot) | 워크플로우 처리·조회·HubDB 적재·PES.UI 포워더 |
+
+```
+[pes-ui (C# UI)] --PES.UI.*.REQUEST--> [PES.UI 포워더] --PES.BIZ.*.EVENT--> [pes-boot (Java Biz)]
+                 <----------------- RV INBOX Reply (PesProcessResult) -----------------
+```
+- 메시지는 양쪽이 동일한 Workflow JSON 계약(camelCase) + RV `json` 필드 규약을 공유합니다.
+- 계약 호환성은 [`PesJsonContractTests`](./src/Pes.Ui.Messaging.Tests) 로 검증됩니다.
 
 ## 솔루션 구성
 
