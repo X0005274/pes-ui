@@ -1,0 +1,13 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net48</TargetFramework>
+    <LangVersion>latest</LangVersion>
+    <!-- 실제 TIBCO 어셈블리명과 동일하게 출력(참조 호환) -->
+    <AssemblyName>TIBCO.Rendezvous</AssemblyName>
+    <RootNamespace>TIBCO.Rendezvous</RootNamespace>
+    <ImplicitUsings>disable</ImplicitUsings>
+    <Nullable>disable</Nullable>
+  </PropertyGroup>
+
+</Project>

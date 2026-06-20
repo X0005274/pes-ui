@@ -8,7 +8,7 @@ on:
 
 jobs:
   build:
-    name: Build (contract library)
+    name: Build (full solution, TIBCO stub)
     # net48 빌드를 위해 .NET Framework 가 설치된 Windows 러너 사용
     runs-on: windows-latest
     steps:
@@ -19,7 +19,7 @@ jobs:
         with:
           dotnet-version: '10.0.x'
 
-      # 상용 TIBCO.Rendezvous.dll 이 필요한 Pes.Ui.Rv / Pes.Ui.Console 은 CI 에서 제외.
-      # 메시지 DTO/JSON 계약 라이브러리(TIBCO 비의존)만 빌드 검증한다.
-      - name: Build Pes.Ui.Messaging
-        run: dotnet build src/Pes.Ui.Messaging/Pes.Ui.Messaging.csproj -c Release --nologo
+      # 기본(UseRealTibrv=false)으로 TIBCO 스텁을 사용해 전체 솔루션을 빌드/검증.
+      # 운영 빌드는 -p:UseRealTibrv=true + TIBRV_HOME 로 실제 DLL 참조.
+      - name: Build solution
+        run: dotnet build Pes.Ui.sln -c Release --nologo

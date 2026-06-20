@@ -7,18 +7,19 @@
     <AssemblyName>Pes.Ui.Rv</AssemblyName>
     <ImplicitUsings>disable</ImplicitUsings>
     <Nullable>disable</Nullable>
+    <!-- 기본은 스텁으로 빌드(개발/CI). 운영 빌드: dotnet build -p:UseRealTibrv=true (TIBRV_HOME 필요) -->
+    <UseRealTibrv Condition="'$(UseRealTibrv)' == ''">false</UseRealTibrv>
   </PropertyGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\Pes.Ui.Messaging\Pes.Ui.Messaging.csproj" />
+    <!-- 스텁 모드: TIBCO.Rendezvous 어셈블리를 스텁 프로젝트로 제공 -->
+    <ProjectReference Include="..\Pes.Ui.Tibco.Stub\Pes.Ui.Tibco.Stub.csproj"
+                      Condition="'$(UseRealTibrv)' != 'true'" />
   </ItemGroup>
 
-  <ItemGroup>
-    <!--
-      TIBCO Rendezvous .NET API (상용). 설치본의 DLL 을 참조한다.
-      TIBRV_HOME 환경변수 기준 (예: C:\tibco\tibrv\8.4\bin\TIBCO.Rendezvous.dll).
-      Maven Central 같은 공개 패키지가 없으므로 로컬/사내 경로 참조.
-    -->
+  <!-- 운영 모드: 상용 TIBCO.Rendezvous.dll 참조 (TIBRV_HOME 기준) -->
+  <ItemGroup Condition="'$(UseRealTibrv)' == 'true'">
     <Reference Include="TIBCO.Rendezvous">
       <HintPath>$(TIBRV_HOME)\bin\TIBCO.Rendezvous.dll</HintPath>
       <Private>false</Private>

@@ -10,10 +10,20 @@ Reply(`PesProcessResult`)를 받습니다. 메시지는 **Java Biz 레이어와 
 ```
 Pes.Ui.sln
 └── src/
-    ├── Pes.Ui.Messaging/   메시지 DTO·JSON 규약·Subject 상수·클라이언트 인터페이스 (TIBCO 비의존)
-    ├── Pes.Ui.Rv/          TIBCO RV 클라이언트 구현 (TIBCO.Rendezvous.dll 필요)
-    └── Pes.Ui.Console/     LOT 요청 송신 샘플
+    ├── Pes.Ui.Messaging/    메시지 DTO·JSON 규약·Subject 상수·클라이언트 인터페이스 (TIBCO 비의존)
+    ├── Pes.Ui.Rv/           TIBCO RV 클라이언트 구현 (스텁 또는 실제 DLL)
+    ├── Pes.Ui.Tibco.Stub/   TIBCO.Rendezvous 최소 스텁(상용 DLL 없이 빌드/CI 용)
+    └── Pes.Ui.Console/      LOT 요청 송신 샘플
 ```
+
+### TIBCO 스텁 vs 실제 DLL
+- **기본(개발/CI)**: `UseRealTibrv=false` → `Pes.Ui.Tibco.Stub` 가 `TIBCO.Rendezvous` 어셈블리를
+  대신 제공해 **상용 DLL 없이 전체 솔루션이 빌드**됩니다. (단, 런타임 `SendRequest` 는 예외 — 통신 불가)
+- **운영**: 실제 `TIBCO.Rendezvous.dll` 로 빌드
+  ```bat
+  set TIBRV_HOME=C:\tibco\tibrv\8.4
+  dotnet build Pes.Ui.sln -c Release -p:UseRealTibrv=true
+  ```
 
 - **Target**: `net48` (.NET Framework 4.8), Visual Studio 2026
 - **코드 규칙**: `var` 미사용(명시적 타입), null 생략 JSON(camelCase) — Java 측과 정합
