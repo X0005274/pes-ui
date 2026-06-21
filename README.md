@@ -66,8 +66,17 @@ dotnet build Pes.Ui.sln -c Release
 set PES_RV_SERVICE=7500
 set PES_RV_NETWORK=;
 set PES_RV_DAEMON=tcp:7500
-dotnet run --project src\Pes.Ui.Console            :: PES.UI.LOT.REQUEST 로 송신
-dotnet run --project src\Pes.Ui.Console -- PES.BIZ.LOT.EVENT  :: 현재 Java Biz 리스너로 직접
+
+:: 사용법: Pes.Ui.Console [lot|wf|durable] [subject]
+::   1번째 인자=도메인(기본 lot), 2번째 인자=subject(기본 PES.UI.<domain>.REQUEST)
+dotnet run --project src\Pes.Ui.Console                 :: LOT     → PES.UI.LOT.REQUEST (created+released)
+dotnet run --project src\Pes.Ui.Console -- wf           :: WF      → PES.UI.WF.REQUEST (created+changeSpec)
+dotnet run --project src\Pes.Ui.Console -- durable      :: DURABLE → PES.UI.DURABLE.REQUEST (created+makeInUse)
+
+:: subject 직접 지정(예: PES.UI 포워더 없이 현재 Java Biz 리스너로 직접 송신)
+dotnet run --project src\Pes.Ui.Console -- lot     PES.BIZ.LOT.EVENT
+dotnet run --project src\Pes.Ui.Console -- wf      PES.BIZ.WF.EVENT
+dotnet run --project src\Pes.Ui.Console -- durable PES.BIZ.DURABLE.EVENT
 ```
 
 ## 사용 예 (라이브러리)
